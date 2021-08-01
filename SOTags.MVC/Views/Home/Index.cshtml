@@ -1,0 +1,36 @@
+﻿@using SOTags.MVC.Models.ViewModels;
+
+@model TagInfosViewModel
+@{
+    ViewData["Title"] = "TOP SO Tags";
+}
+
+<div class="text-center">
+    <h1 class="display-4">SO TAGS RANKING</h1>
+    <p>Lista 1000 najpopularniejszych tagów na stronie StackOverflow.</p>
+</div>
+@if (Model != null)
+{
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <table style="text-align: center;">
+            <tr>
+                <th style="text-align: center;">Tag</th>
+                <th style="text-align: center;">Liczba</th>
+                <th style="text-align: center;">Procentowy udział</th>
+            </tr>
+
+            @foreach (var item in Model.TagInfos)
+            {
+                <tr>
+                    <td style="text-align: center;">@item.Name</td>
+                    <td style="text-align: center;">@item.Count</td>
+                    <td style="text-align: center;">@Model.TagsPercentages[item.Name] %</td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+else
+{
+    <h3 style="text-align: center;">Wystąpił błąd podczas wczytywania danych z API StackOverflow!</h3>
+}
